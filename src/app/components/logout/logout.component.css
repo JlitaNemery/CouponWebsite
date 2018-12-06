@@ -1,0 +1,16 @@
+a {
+    color: blue;
+
+}
+nav {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: larger;
+}
+
+.the-chosen-one {
+    font-weight: bold;
+    color: darkblue;
+    text-decoration: none;
+}

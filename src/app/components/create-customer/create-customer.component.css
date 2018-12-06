@@ -1,0 +1,9 @@
+span {
+    color: red;
+    text-align: left;
+    margin: 10px;
+}
+
+.ng-touched.ng-invalid:not(form) {
+    border: 2px solid red;
+}

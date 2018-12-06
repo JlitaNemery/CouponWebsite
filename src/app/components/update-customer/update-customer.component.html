@@ -1,0 +1,49 @@
+<div>
+    <form #Form="ngForm" (ngSubmit)="updateCustomer(customerId)">
+
+        <h2>Update customer</h2>
+        <table border="1" align="center">
+            <tr>
+                <td>First Name: </td>
+                <td>
+                    <input required #firstName="ngModel" [(ngModel)]="customer.firstName" type="text" name="firstName" 
+                        plaseholder="first name" pattern="^[A-Za-z]+$">
+                    <br>
+                    <span *ngIf="firstName.errors?.required && firstName.invalid && firstName.touched">Missing First Name</span>
+                    <span *ngIf="firstName.errors?.pattern && firstName.invalid && firstName.touched">Illegal First Name</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name: </td>
+                <td>
+                    <input required #lastName="ngModel" [(ngModel)]="customer.lastName" type="text" name="lastName" 
+                        plaseholder="last name" pattern="^[A-Za-z]+$">
+                    <br>
+                    <span *ngIf="lastName.errors?.required && lastName.invalid && lastName.touched">Missing Last Name</span>
+                    <span *ngIf="lastName.errors?.pattern && lastName.invalid && lastName.touched">Illegal Last Name</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td>
+                    <input required email #email="ngModel" [(ngModel)]="customer.email" type="email" name="email">
+                    <br>
+                    <span *ngIf="email.errors?.required && email.invalid && email.touched">Missing Email</span>
+                    <span *ngIf="email.errors?.email && email.invalid && email.touched">Illegal Email</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td>
+                    <input required #password="ngModel" [(ngModel)]="customer.password" type="password" name="password" pattern="^\w{4,8}$">
+                    <br>
+                    <span *ngIf="password.errors?.required && password.touched">Missing Password</span>
+                    <span *ngIf="password.errors?.pattern && password.invalid && password.touched">Illegal password</span>
+                </td>
+            </tr>      
+        </table>
+        <br>
+        <button [disabled]="Form.form.invalid" (click)="setCustomerId(tempCustomerId)">Update Customer</button>   
+    </form>
+    <input [(ngModel)]="tempCustomerId" placeholder="customer id..." type="number"  pattern="\d+">         
+ </div>

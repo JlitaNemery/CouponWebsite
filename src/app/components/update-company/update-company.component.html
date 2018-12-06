@@ -1,0 +1,34 @@
+<div>
+    <form #Form="ngForm" (ngSubmit)="updateCompany(companyId)">
+
+        <h2>Update company</h2>
+        <table border="1" align="center">
+
+            <tr>
+                <td>Email: </td>
+                <td>
+                    <input required email #email="ngModel" [(ngModel)]="company.email" type="email" name="email">
+                    <br>
+                    <span *ngIf="email.errors?.required && email.invalid && email.touched">Missing Email</span>
+                    <span *ngIf="email.errors?.email && email.invalid && email.touched">Illegal Email</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td>
+                    <input required #password="ngModel" [(ngModel)]="company.password" type="password" 
+                        name="password" pattern="^\w{4,8}$">
+                    <br>
+                    <span *ngIf="password.errors?.required && password.touched">Missing Password</span>
+                    <span *ngIf="password.errors?.pattern && password.invalid && password.touched">Illegal password</span>
+                </td>
+            </tr>
+
+
+        </table>
+        <br>
+        <button [disabled]="Form.form.invalid" (click)="setCompanyId(tempCompanyId)">Update Company</button>  
+    </form>
+    <input [(ngModel)]="tempCompanyId" placeholder="company id..." type="number" pattern="\d+">      
+
+ </div>

@@ -1,0 +1,33 @@
+
+<h1>Login</h1>
+
+<hr>
+<br>
+
+<div id="loginFormDiv">
+
+    <form #loginForm="ngForm" (ngSubmit)="send()">
+
+        Email <br>
+        <input required email #email="ngModel" [(ngModel)]="login.email" type="email" name="email" placeholder="Email...">
+        <span *ngIf="email.errors?.required && email.invalid && email.touched">Missing Email</span>
+        <span *ngIf="email.errors?.email && email.invalid && email.touched">Illegal Email</span>
+        <br>
+        Password <br>
+        <input required #password="ngModel"[(ngModel)]="login.password" type="password" name="password" placeholder="password..." pattern="^\w{4,8}$">
+        <span *ngIf="password.errors?.required && password.touched">Missing Password</span>
+        <span *ngIf="password.errors?.pattern && password.invalid && password.touched">Illegal password</span>
+        <br> 
+
+       
+        <select #clientType="ngModel" [(ngModel)]="login.clientType" type="clientType" name="clientType">
+            <option value="CUSTOMER">CUSTOMER</option>
+            <option value="COMPANY">COMPANY</option>
+            <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+        </select>
+        <br>
+       <button [disabled]="loginForm.form.invalid">Login</button>
+    </form>
+    
+</div>
+

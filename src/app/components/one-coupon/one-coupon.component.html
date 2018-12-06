@@ -1,0 +1,13 @@
+<button (click)="purchaseCoupon(coupon)">purchase</button>
+<h2>company id: {{coupon.companyId}}</h2>
+<h2>category: {{coupon.category}}</h2>
+<h2>title: {{coupon.title}}</h2>
+<h2>description: {{coupon.description}}</h2>
+<h2>start date: {{coupon.startDate}}</h2>
+<h2>end date: {{coupon.endDate}}</h2>
+<h2>amount: {{coupon.amount}}</h2>
+<h2>price: {{coupon.price}}</h2>
+<app-thumbnail imageSource="/assets/images/coupons/{{coupon.image}}.jpg" 
+          imageWidth="200" imageHeight="200"></app-thumbnail>
+
+

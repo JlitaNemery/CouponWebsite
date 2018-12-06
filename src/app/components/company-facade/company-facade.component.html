@@ -1,0 +1,133 @@
+<h1>Welcome Back Company Manager!</h1>
+<app-logout></app-logout>
+
+
+<button (click)="getCompanyIncome()">
+    Get Company Income
+</button>
+<br>
+<span *ngIf="companyIncome">company income: {{ companyIncome }}</span>
+<br>
+<br>
+<button (click)="getCompanyIncomeArray()">
+    Get Income Report
+</button>
+
+<table *ngIf="allIncomes" id="incomes" border="1" align="center">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Company ID</th>
+    </tr>
+
+    <tr *ngFor="let i of allIncomes">
+        <td>{{ i.id }}</td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.date }}</td>
+        <td>{{ i.description }}</td>
+        <td>{{ i.amount | currency:'ILS' }}</td>
+        <td>{{ i.companyId }}</td>
+    </tr>
+
+</table>
+<br>
+
+
+<table border="1" align="center">
+    <tr>
+        <td>
+            <createCoupon></createCoupon>
+        </td>
+        <td>
+            <updateCoupon></updateCoupon>     
+        </td>
+        
+    </tr>
+</table> 
+<br>
+<br>
+
+<table *ngIf="allCoupons" id="coupons" border="1" align="center">
+    <tr>
+        <th>Coupon ID</th>
+        <th>Company ID</th>
+        <th>Category</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Amount</th>
+        <th>Price</th>
+        <th>Image</th>
+
+    </tr>
+
+    <tr *ngFor="let c of allCoupons">
+        <td><a routerLink="/one-coupon-for-company/{{c.id}}" routerLinkActive="the-chosen-one">{{ c.id }}</a></td>
+        <td>{{ c.companyId }}</td>
+        <td>{{ c.category }}</td>
+        <td>{{ c.title }}</td>
+        <td>{{ c.description }}</td>
+        <td>{{ c.startDate }}</td>
+        <td>{{ c.endDate }}</td>
+        <td>{{ c.amount }}</td>
+        <td>{{ c.price | currency:'ILS' }}</td>
+        <td>
+            <app-thumbnail imageSource="/assets/images/coupons/{{c.image}}.jpg" 
+                    imageWidth="50" imageHeight="50"></app-thumbnail>
+        </td>
+    </tr>
+
+</table>
+<br>
+<br>
+<input [(ngModel)]="id" placeholder="coupon id..." type="number">
+<button (click)="removeCoupon(id)" >
+    Delete Coupon
+</button>
+<button (click)="getCoupon(id)" >
+    Get Coupon
+</button>
+<br>
+<br>
+<br>
+
+<button (click)="getAllCoupons()" >
+    Get All Coupons
+</button>
+<br>
+<br>
+
+<button (click)="getCompanyCouponsByPrice(maxPrice)">
+    Get Coupons By Max Price
+</button>
+<input [(ngModel)]="maxPrice" placeholder="Max Price..." pattern="\d{1,}(.\d{1,})?" type="number">
+<br>
+<br>
+
+<button (click)="getCompanyCouponsByCategory(category)">
+    Get Coupons By Category
+</button>
+<select #clientType="ngModel" [(ngModel)]="category">
+    <option value="ELECTRICITY">Electricity</option>
+    <option value="FOOD">Food</option>
+    <option value="RESTAURANT">Restaurant</option>
+    <option value="VACATION">Vacation</option>
+    <option value="FASHION">Fashion</option>
+    <option value="HOME_DEPOT">Home Depot</option>
+    <option value="TOYS">Toys</option>
+    <option value="GARDEN">Garden</option>
+    <option value="MUSICAL_INSTRUMENTS">Musical Instruments</option>
+</select>
+
+<br>
+
+
+
+
+    
+
+

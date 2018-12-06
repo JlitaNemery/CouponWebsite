@@ -1,0 +1,255 @@
+<h1>Welcome Administrator!</h1>
+<app-logout></app-logout>
+
+
+
+<table border="1" align="center">
+    <tr>
+        <td>
+            <createCompany></createCompany>
+        </td>
+        <td>
+            <updateCompany></updateCompany>
+        </td>
+        
+    </tr>
+</table> 
+
+<br>
+<table *ngIf="allCompanies" border="1" align="center">
+    <tr>
+        <th>Company ID</th>
+        <th>Company Name</th>
+        <th>Company Email</th>
+        <th>Company Password</th>
+        <th>Company Coupons</th>
+    </tr>
+
+    <tr *ngFor="let company of allCompanies">
+        <td>{{ company.id }}</td>
+        <td>
+        <a routerLink="/oneCompany/{{company.id}}">{{ company.name }}</a>
+        </td>
+        <td>{{ company.email }}</td>
+        <td>{{ company.password }}</td>
+        <td>
+            <table *ngIf="company.coupons!=0" border="1" align="center" id="coupons" >
+                <tr>
+                    <th> ID </th>
+                    <th> Title </th>
+                    <th> Start Date </th>
+                    <th> End Date </th>
+                    <th> Description </th>
+                    <th> Price </th>
+                    <th> Image </th>
+                </tr >
+                <tr *ngFor="let c of company.coupons">
+                    <td>{{ c.category }}</td>
+                    <td>{{ c.title }}</td>
+                    <td>{{ c.description }}</td>
+                    <td>{{ c.startDate }}</td>
+                    <td>{{ c.endDate }}</td>
+                    <td>{{ c.amount }}</td>
+                    <td>{{ c.price | currency:'ILS' }}</td>
+                    <td>
+                        <app-thumbnail imageSource="/assets/images/coupons/{{c.image}}.jpg" 
+                                    imageWidth="50" imageHeight="50"></app-thumbnail>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<button (click)="removeCompany(companyId)" >
+    Delete Company
+</button>
+<button (click)="getCompany(companyId)" >
+    Get Company
+</button>
+<button (click)="getCompanyIncomeNumber(companyId)" >
+    Get Company Income
+</button>
+<button (click)="getCompanyIncomes(companyId)" >
+    Get Company Income Report
+</button>
+<br>
+<span *ngIf="companyIncome">company income: {{ companyIncome }}</span>
+<br>
+<table *ngIf="companyIncomes" id="companyIncomes" border="1" align="center">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Company ID</th>
+    </tr>
+
+    <tr *ngFor="let i of companyIncomes">
+        <td>{{ i.id }}</td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.date }}</td>
+        <td>{{ i.description }}</td>
+        <td>{{ i.amount | currency:'ILS' }}</td>
+        <td>{{ i.companyId }}</td>
+    </tr>
+
+</table>
+<br>
+<input [(ngModel)]="companyId" placeholder="company id..." type="number">
+<br>
+
+<br>
+
+<button (click)="getAllCompanies()" >
+    Get All Companies
+</button>
+<br>
+<br>
+
+
+
+<table border="1" align="center">
+    <tr>
+        <td>
+            <createCustomer></createCustomer>
+        </td>
+        <td>
+            <updateCustomer></updateCustomer>
+        </td>
+        
+    </tr>
+</table> 
+<br>
+<br>
+
+
+<table *ngIf="allCustomers" border="1" align="center">
+    <tr>
+        <th>Customer ID</th>
+        <th>Customer First Name</th>
+        <th>Customer Last Name</th>
+        <th>Customer Email</th>
+        <th>Customer Password</th>
+        <th>Customer Coupons</th>
+    </tr>
+    
+    <tr *ngFor="let customer of allCustomers">
+        <td>{{ customer.id }}</td>
+        <td>
+        {{ customer.firstName }}
+        </td>
+        <td>{{ customer.lastName }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.password }}</td>
+        <td>
+            <table border="1" align="center" id="coupons" *ngIf="customer.coupons!=0">
+                <tr>
+                    <th> ID </th>
+                    <th> Title </th>
+                    <th> Start Date </th>
+                    <th> End Date </th>
+                    <th> Description </th>
+                    <th> Price </th>
+                    <th> Image </th>
+                </tr >
+                <tr *ngFor="let c of customer.coupons">
+                    <td> {{ c.id }} </td>
+                    <td> {{ c.title }}</td>
+                    <td> {{ c.startDate }}</td>
+                    <td> {{ c.endDate }}</td>
+                    <td> {{ c.description }} </td>
+                    <td> {{ c.price }}</td>
+                    <td>
+                        <app-thumbnail imageSource="/assets/images/coupons/{{c.image}}.jpg" 
+                                    imageWidth="50" imageHeight="50"></app-thumbnail>
+                    </td>
+                  </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+<button (click)="removeCustomer(customerId)" >
+    Delete Customer
+</button>
+<button (click)="getCustomer(customerId)" >
+    Get Customer
+</button>
+<button (click)="getCustomerIncomeNumber(customerId)" >
+    Get Customer Income
+</button>
+<button (click)="getCustomerIncomes(customerId)" >
+    Get Customer Income Report
+</button>
+<br>
+<span *ngIf="customerIncome">customer income: {{ customerIncome }}</span>
+<br>
+<br>
+<input [(ngModel)]="customerId" placeholder="customer id..." type="number">
+<br>
+<br>
+<br>
+<table *ngIf="customerIncomes" id="customerIncomes" border="1" align="center">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Customer ID</th>
+    </tr>
+
+    <tr *ngFor="let i of customerIncomes">
+        <td>{{ i.id }}</td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.date }}</td>
+        <td>{{ i.description }}</td>
+        <td>{{ i.amount | currency:'ILS' }}</td>
+        <td>{{ i.customerId }}</td>
+    </tr>
+
+</table>
+<br>
+<button (click)="getAllCustomers()" >
+    Get All Customers
+</button>
+<br>
+<br>
+
+
+<button (click)="getGeneralIncomeNumber()" >
+    Get General Income
+</button>
+<br>
+<span *ngIf="generalIncome"> income: {{ generalIncome }}</span>
+<br>
+<button (click)="getGeneralIncomes()" >
+    Get General Income Report
+</button>
+<br>
+<table *ngIf="generalIncomes" id="incomes" border="1" align="center">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Customer ID</th>
+        <th>Company ID</th>
+    </tr>
+
+    <tr *ngFor="let i of generalIncomes">
+        <td>{{ i.id }}</td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.date }}</td>
+        <td>{{ i.description }}</td>
+        <td>{{ i.amount | currency:'ILS' }}</td>
+        <td *ngIf="i.customerId!=0">{{ i.customerId }}</td>
+        <td *ngIf="i.customerId==0"></td>
+        <td *ngIf="i.companyId!=0">{{ i.companyId }}</td>
+        <td *ngIf="i.companyId==0"></td>
+
+    </tr>
+
+</table>

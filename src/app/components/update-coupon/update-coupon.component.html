@@ -1,0 +1,90 @@
+
+<div>
+    <form #Form="ngForm" (ngSubmit)="updateCoupon()">
+
+        <h2>Update coupon</h2>
+        <table border="1" align="center">
+                <tr>
+                    <td>Category: </td>
+                    <td>
+                        <select #categoryId="ngModel" [(ngModel)]="coupon.category" name="category" type="text"> 
+                            <option value="ELECTRICITY">Electricity</option>
+                            <option value="FOOD">Food</option>
+                            <option value="RESTAURANT">Restaurant</option>
+                            <option value="VACATION">Vacation</option>
+                            <option value="FASHION">Fashion</option>
+                            <option value="HOME_DEPOT">Home Depot</option>
+                            <option value="TOYS">Toys</option>
+                            <option value="GARDEN">Garden</option>
+                            <option value="MUSICAL_INSTRUMENTS">Musical Instruments</option>
+                            </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Title: </td>
+                    <td>
+                        <input required #title="ngModel" [(ngModel)]="coupon.title" type="text" name="title" 
+                            placeholder="title..." pattern="^[A-Za-z_.0-9-]{2,50}$" >
+                        <br>
+                        <span *ngIf="title.errors?.required && title.invalid && title.touched">Missing Title</span>
+                        <span *ngIf="title.errors?.pattern && title.invalid && title.touched">Illegal Title</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description: </td>
+                        <td>
+                            <input required #description="ngModel" [(ngModel)]="coupon.description" type="text" name="description" 
+                                placeholder="description..." pattern="^[A-Za-z_ .0-9]{1,250}$">
+                            <br>
+                            <span *ngIf="description.errors?.required && description.invalid && description.touched">Missing Description</span>
+                            <span *ngIf="description.errors?.pattern && description.invalid && description.touched">Illegal Description</span>
+                        </td>
+                </tr>
+                <tr>
+                    <td>Start Date: </td>
+                    <td>
+                        <input required #startDate="ngModel" [(ngModel)]="coupon.startDate" type="date" name="startDate">
+                    </td>
+                </tr>
+                <tr>
+                    <td>End Date: </td>
+                    <td>
+                        <input required #endDate="ngModel" [(ngModel)]="coupon.endDate" type="date" name="endDate">
+                    </td>
+                 </tr>        
+                 <tr>
+                    <td>Amount: </td>
+                    <td>
+                        <input required #amount="ngModel" [(ngModel)]="coupon.amount" type="number" name="amount" pattern="\d+">
+                    </td>
+                </tr> 
+                <tr>
+                    <td>Price: </td>
+                    <td>
+                        <input required #price="ngModel" [(ngModel)]="coupon.price" type="number" name="price">
+                    </td>
+                </tr> 
+                <tr>
+                    <td>Image: </td>
+                    <td>
+                        <select #image="ngModel" [(ngModel)]="coupon.image" name="image">
+                            <option value="airline">airline</option>
+                            <option value="cookies">cookies</option>
+                            <option value="dinner">dinner</option>
+                            <option value="dress">dress</option>
+                            <option value="drill">drill</option>
+                            <option value="guitar">guitar</option>
+                            <option value="lego">lego</option>
+                            <option value="orchid">orchid</option>
+                            <option value="washing machine">washer</option>
+                        </select>
+                    </td>
+                </tr> 
+            </table>
+        <br>
+        <button [disabled]="Form.form.invalid" (click)="setCouponId(tempCouponId)">update Coupon</button> 
+    </form>
+
+    <input [(ngModel)]="tempCouponId" placeholder="coupon id..." type="number" pattern="\d+">       
+
+ </div>

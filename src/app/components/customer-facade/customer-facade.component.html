@@ -1,0 +1,59 @@
+<app-logout></app-logout>
+<button (click)="getAllCouponsasync()">
+        My Coupons
+</button>
+<button (click)="getAvailableCouponsasync()">
+        Available Coupons
+</button>
+<button (click)="getCouponsbyPrice(maxPrice)">
+        My Coupons By Max Price
+</button>
+<input [(ngModel)]="maxPrice" placeholder="Max Price..." pattern="\d{1,}(.\d{1,})?" type="number">
+<button (click)="getCouponsbyCategory(category)">
+        My Coupons By Category
+</button>
+<select #clientType="ngModel" [(ngModel)]="category">
+        <option value="ELECTRICITY">Electricity</option>
+        <option value="FOOD">Food</option>
+        <option value="RESTAURANT">Restaurant</option>
+        <option value="VACATION">Vacation</option>
+        <option value="FASHION">Fashion</option>
+        <option value="HOME_DEPOT">Home Depot</option>
+        <option value="TOYS">Toys</option>
+        <option value="GARDEN">Garden</option>
+        <option value="MUSICAL_INSTRUMENTS" selected>Musical Instruments</option>
+</select>
+
+<table *ngIf="allCoupons" border="1" align="center">
+    <tr>
+        <th>Coupon ID</th>
+        <th>Company ID</th>
+        <th>Category ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Amount</th>
+        <th>Price</th>
+        <th>Image</th>
+
+    </tr>
+
+    <tr *ngFor="let c of allCoupons">
+        <td><a routerLink="/one-coupon/{{c.id}}" routerLinkActive="the-chosen-one">{{ c.id }}</a></td>
+        <td>{{ c.companyId }}</td>
+        <td>{{ c.category }}</td>
+        <td>{{ c.title }}</td>
+        <td>{{ c.description }}</td>
+        <td>{{ c.startDate }}</td>
+        <td>{{ c.endDate }}</td>
+        <td>{{ c.amount }}</td>
+        <td>{{ c.price | currency:'ILS' }}</td>
+        <td>
+            <app-thumbnail imageSource="/assets/images/coupons/{{c.image}}.jpg" 
+                imageWidth="50" imageHeight="50"></app-thumbnail>
+        </td>
+    </tr>
+
+</table>
+

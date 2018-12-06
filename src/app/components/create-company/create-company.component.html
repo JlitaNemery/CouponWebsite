@@ -1,0 +1,41 @@
+<div>
+    <form #newCompanyForm="ngForm" (ngSubmit)="createCompany()">
+
+        <h2>Create a new company</h2>
+        <table border="1" align="center">
+            <tr>
+                <td>Name: </td>
+                <td>
+                    <input required #name="ngModel" [(ngModel)]="company.name" type="text" name="name" 
+                        plaseholder="name" pattern="^[A-Za-z_.0-9-]{2,50}$">
+                    <br>
+                    <span *ngIf="name.errors?.required && name.invalid && name.touched">Missing Name</span>
+                    <span *ngIf="name.errors?.pattern && name.invalid && name.touched">Illegal Name</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                    <td>
+                        <input required email #email="ngModel" [(ngModel)]="company.email" type="email" name="email">
+                        <br>
+                        <span *ngIf="email.errors?.required && email.invalid && email.touched">Missing Email</span>
+                        <span *ngIf="email.errors?.email && email.invalid && email.touched">Illegal Email</span>
+                    </td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                    <td>
+                        <input required #password="ngModel" [(ngModel)]="company.password" type="password" 
+                            name="password" pattern="^\w{4,8}$">
+                        <br>
+                        <span *ngIf="password.errors?.required && password.touched">Missing Password</span>
+                        <span *ngIf="password.errors?.pattern && password.invalid && password.touched">Illegal password</span>
+                    </td>
+            </tr>
+
+
+        </table>
+        <br>
+        <button [disabled]="newCompanyForm.form.invalid">Create Company</button>        
+    </form>
+ </div>
